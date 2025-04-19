@@ -6,11 +6,15 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const compat = new FlatCompat({
-  baseDirectory: __dirname,
+    baseDirectory: __dirname,
 });
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+    // Ignore generated folders like .next and node_modules
+    {
+        ignores: ["**/node_modules/**", "**/.next/**"],
+    },
+    ...compat.extends("next/core-web-vitals", "next/typescript"),
 ];
 
 export default eslintConfig;
